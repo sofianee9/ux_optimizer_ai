@@ -75,7 +75,6 @@ venv\Scripts\activate
 pip install -r requirements.txt
 # Lancer le serveur
 python main.py
-
 Le serveur API démarrera sur http://127.0.0.1:8000.
 
 Note : Créez un fichier .env dans le dossier backend et ajoutez votre clé : GEMINI_API_KEY=votre_clé_ici
@@ -89,6 +88,7 @@ npm run dev
 
 L'application sera accessible sur http://localhost:5173.
 
+```
 
 👤 Auteur & Contexte
 
