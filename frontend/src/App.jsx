@@ -12,7 +12,7 @@ export default function App() {
     setResult(null)
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/analyze', {
+      const response = await fetch('(`${import.meta.env.VITE_API_URL}/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: url })
@@ -139,7 +139,7 @@ export default function App() {
               
               <div className="grid md:grid-cols-2 gap-12">
                 
-                {/* COLONNE GAUCHE : IA STRATÉGIQUE (NOUVELLE COULEUR) */}
+                {/* COLONNE GAUCHE : IA STRATÉGIQUE  */}
                 <div>
                   {/* Titre changé et couleur changée */}
                   <h3 className="text-indigo-400 font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
@@ -157,7 +157,7 @@ export default function App() {
                   )}
                 </div>
 
-                {/* COLONNE DROITE : CORRECTIFS TECHNIQUES */}
+                {/* COLONNE DROITE */}
                 <div>
                   <h3 className="text-orange-400 font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
                     🛠️ Correctifs Techniques
