@@ -2,12 +2,11 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-# On importe notre nouveau cerveau
 from analyzer import analyze_seo 
 
 app = FastAPI()
 
-# Configuration CORS (Autorise tout le monde pour le dev)
+# Configuration CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -25,13 +24,12 @@ def read_root():
 
 @app.post("/analyze")
 def analyze_url_endpoint(request: AuditRequest):
-    # Appel de la vraie fonction d'analyse
+
     result = analyze_seo(request.url)
     
     # Gestion d'erreur si l'analyse a échoué
     if "error" in result:
-         # On renvoie quand même un structure valide pour ne pas casser le frontend, 
-         # mais avec un score de 0
+        
          return {
              "url": request.url,
              "score_global": 0,

@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 from pathlib import Path
-import re # <--- L'outil pour nettoyer les étoiles **
+import re
 
 # --- 1. CONFIGURATION ---
 current_dir = Path(__file__).resolve().parent
@@ -31,7 +31,7 @@ def get_best_model():
 
 CURRENT_MODEL_NAME = get_best_model() if api_key else None
 
-# --- 3. FONCTION CERVEAU IA (NETTOYAGE RENFORCÉ) ---
+# --- 3. CERVEAU IA ---
 def analyze_content_with_ai(text_content: str):
     if not api_key: return "⚠️ Clé API manquante."
     if not text_content or len(text_content) < 50: return "Contenu insuffisant."
@@ -88,10 +88,8 @@ def analyze_content_with_ai(text_content: str):
         model = genai.GenerativeModel(CURRENT_MODEL_NAME)
         response = model.generate_content(prompt)
         
-        # NETTOYAGE CHIRURGICAL
         clean_text = response.text.replace("```html", "").replace("```", "")
         
-        # C'est cette ligne qui transforme les **Titre** en <strong>Titre</strong> (Gras)
         clean_text = re.sub(r'\*\*(.*?)\*\*', r'<strong class="text-white">\1</strong>', clean_text)
         
         return clean_text
@@ -120,7 +118,7 @@ def analyze_seo(url: str):
         score = 100
         audit = []
 
-        # METRICS TECHNIQUES (inchangées)
+        # METRICS TECHNIQUES
         t = soup.title.string.strip() if soup.title and soup.title.string else None
         if not t: score-=20; audit.append({"cat":"SEO","label":"Titre","status":"danger","val":"Manquant","expl":"Critique.","reco":"Ajoutez une balise <title> descriptive."})
         elif len(t)>65: score-=5; audit.append({"cat":"SEO","label":"Titre","status":"warning","val":f"{len(t)} car.","expl":"Trop long.","reco":"Raccourcissez (max 60 car)."})

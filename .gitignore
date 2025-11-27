@@ -1,0 +1,23 @@
+# --- SÉCURITÉ ---
+.env
+*/.env
+backend/.env
+frontend/.env
+
+# --- PYTHON ---
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+*/venv/
+backend/venv/
+
+# --- NODE / REACT ---
+node_modules/
+*/node_modules/
+dist/
+.DS_Store
+
+# --- IDE ---
+.vscode/
+.idea/
